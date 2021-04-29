@@ -1,0 +1,9 @@
+.friend {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+.friend img {
+  width: 100%;
+  height: 100%;
+}

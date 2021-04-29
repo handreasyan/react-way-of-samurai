@@ -1,0 +1,34 @@
+.nav {
+  background-color: #311a46;
+  grid-area: n;
+  text-align: center;
+  padding: 20px;
+  height: 100%;
+}
+.item {
+  color: red;
+}
+.item a {
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.item a.active {
+  border-bottom: 2px solid gold;
+  color: gold;
+}
+.friends {
+  margin-top: 30px;
+  width: 100%;
+  color: white;
+  font-size: 20px;
+  display: grid;
+  grid-gap: 10px;
+
+  grid-template-columns: repeat(auto-fill, 30px);
+}
+.friends_title {
+  border-bottom: 2px solid white;
+  width: 250%;
+}

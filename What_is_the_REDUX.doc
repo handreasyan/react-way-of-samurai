@@ -1,0 +1,15 @@
+REDUX _ reacti gradaran , vore ogtagorcvuma State Managementi hamar , aysinqn nra hamar vor mer unecac datan(danninere,informacian) pahi,karavari u UI in poxanci , nuyn en store objectna vore vor menq sarqecinq , uxxaki mikich aveli mashtabni chaperov, vonc iran ogtagorcenq ? 
+
+nax anumenq nmp install redux --save  ,,, heto `
+ unenumenq ,mi hat arandzin fayl , u dra mej kanchumenq createStore() functione , u dra veradarcrac arjeqe pajhumenq mihat store(kam inj uzenq) popoxakani mej,, u naxoroq petqa import anel iran iharke `   import { createStore } from "redux";
+
+ dranic heto , menq uneninq reducerner , injein iranq ? nu functionnerein amen mi eji hamar ira reducere,voronq vor staunm ein action u state ,  u qani vor eji vra injvor popoxutyan depqum sax reducernere kanchveluein , bayc menq uzumenq imananq , konkret vor reducere petqa ashxati dra hamar iranc mej if erov stugel einq , iranc tarberutyunnel erevuma menak iranc poxancvac actioni typeic , aysinqn amen mi reducerin arandzin tveleinq injvor type vore petqa nuyne liner inj vor actionine , 
+
+ hima , vonc vor menq et reducernere sax lcreleinq dispatchi mej, petqa poxancenq es mer reduxin aysinqn popoxakanin vori mej vor kar createStore(reducers) functione,,, bayc de qani reducernere shaten naxoroq iranc miavorumenq , ogtagorcelov combineReducers() functione(dael iharke importa arvum __ import { combineReducers } from "redux";) ,  iran poxancumenq object , vori mej linumen ira statei anune vorpes key u reduceri anune vorpes value , vorovhetev menq urish texer dimelenq et stori meji et anunov obyektnerin, u vorpes key vor tanq inqe tanelua nenc texa dnelu vor mer dimace jisht lini , nu vochte inqna harmaracnelu mer het , ayl menq henc naxoroq nenceinq sarqel dasavorvacutyune vor reduxnel ogtver dranic , bnakanabar petqa naxoroq import arven et reducernere iranc hamapatasxan fayleric ,, 
+
+ dranic heto ` menq mer amboxj informacian paheleinq mer store objecti _state bajni mej , hima petqa mi dzev poxancenq eti reduxin(nor stexcac store objectin) dra hamar , mer reducerneri ejum (amen meki ejum ira hamapatasxan state ) naxoroq vorpes naxnakan arjeq vor reducere stanumer state ev action ay et stacac statein naxoroq talisenq ira state amboxjutyamb __ aysinqn sran```` profileReducer = (state, action) sarqumenq senc ``` profileReducer = (state = initialState, action) u es initialState i mej dnum ira hamapatasxan state ,  initialState = {stex en informacian inje vor lcvacer es depqum orinak profiledata_i mej },,, u tenc amen mi reduceri hamar anumenq nuyne , 
+
+
+ hima aysinqn mer sarqac nor stor objecti getState() methode mez kta ira state(nuyn mer unecac _state _ y) ira mej gnacel lcvelen en arjeqnereinje vor tvelei combineReducers _ in , aysinqn ira keyeri mej drvela en statey vore vor default tvelei reduceri statein , u ira reducere arandzin
+
+ hima mikich djvara patkeracnel bayc ynthacqum kjogenq 

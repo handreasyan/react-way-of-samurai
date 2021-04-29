@@ -1,0 +1,28 @@
+Reactin u Redux in irar kapox ban petqa unenanq, aysinqn nenc ban vore vor Reacti Componentnerin kkapi storei het  (UI => BLL) , u da React-Redux libraryna nax petqa iran qashenq ` npm install react-redux --save ,,,,, heto mer amboxj APP y petqa patatenq Provideri mej (vore petqa import arvi ` import {Provider} from "react-redux") u senc et Providerin trvi mer store store attributi mijocov => <Provider store={myStore} > <App /> </Provider>
+
+heto mer Container Componenty mikich dzevapoxumenq , nu nencenq anum vor iran arden sarqi React-Reduxe ayl voch te menq , dra hamar krknaki kanchumenq connect()() functione (vore naev importenq anum `  import { connect } from "react-redux";)  ,, vonc krknaki >? aysinqn kanchumenq connecte vore mi kveradarcni function u iran noric kkanchenq darnuma 2 angam miangamic , bayc araji angam connect in petqa poxancenq erku hat function , vor erkusnel veradarcnen object vornc mej lcvac klinen `
+   1.arajini mej klcneneq en arjeqnere voronq vor petqa poxanceinq mer componentin(uxxaki datanere vore vor inqe piti stanar u gtagorcer) u iran kkochenq mapStateToProps function u sael ir hertin vorpeszi karena ashxati et stacac arjeqneri het iran asumenq vor petqa stana mi parametr , state (mer stori meji statna ) et statey iran poxancelua RR-y , aysinqn senc mi ban  => 
+      let mapStateToProps = (state) => { // iran vor poxancenq connect inqe aftomat iran statey kpoxanci kancheluc , erb vor petq lini  
+         return {
+            newPostText: state.profilePage.newPostText,
+         };
+      };,
+
+  2. erkrordi mej klcnenq en bolor CallBack functionnere vore eli petqa stanar mer componenty u iranc kancher injvor konkret gorcoxutyan jamanak , u iran kkochenq mapDispatchToProps, u sranel asumenq vor petqa stana arjeq , storei dispatche , vor et dispatchic karena stana CallBackere  = >  let mapDispatchToProps = (dispatch) => {
+                        return {
+                              updateNewPostText: (text) => {
+                                 dispatch(updateNewPostTextActionCreator(text));
+                              },
+                           };
+                     };
+
+isk ay connecti erkrord kanchi jamanak iran arden poxancumenq en Componenty vori het vor inqe ashxatelua , aysinqn logikan petqa mshaki u et componentin het veradarcni , u et componente arden ira propsneric kara sten en inje vor poxanceleinq connecti araji kanchi 2 functionneri objectneri mej ,, aysinqn stanumenq senc mi ban =>  
+
+const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);
+
+/////////////
+senc mi nyuans ,,,  RR y ashxatuma nenc vor stanum u hishuma hin statey heto eji vra popoxutyan jamanak stanuma et nor ekac statey hamematuma irar ete popoxutyun chexav chi poxum state , de qani vor iranq objectnere menq iranc nerqin parunakutyune ijqanel poxenq iranq meka chen poxvum, aysinqn mnumen nuyn hascei vra , u hetevabar inqe chi haskana vor poxvelen , el chi mtnum meji exace nayi tena vor poxvela te che , ayl uxxaki eresanc nayuma hascen ete chi poxvel uremn chen poxvel , dra hamar mer reduceri mej , vore vor naev sarqum u stanumer state , petqa popoxutyunner annenq mikich , aysinqn amen angam erb nor statea galis et nor state petqa menq copy anenq u nor hamematenq hin statei het , aysinqn darnuma senc , ete nenc bana het ekel vor et ekaci actioni type hamapatasxanela tvyal reducerei het uremn hastat mi ban poxvela , hetevabar ete poxvela iran heta ekel nor state , bayc et nor ekac state eli nuyn hin statena uxxaki meje injvor arjeqneri popoxutyamb , hetevabar minjev et ekac statei het ashxately menq vercnumenq copy enq anum et ekac state =>  let stateCopy = { ...state };
+u ashxatumenq et coopy arac statei het , u nor iran veradarcnum , inqe vercnuma et veradarcrac state hamematuma hni het , tenuma vor urish statea el chi nayum meji exac chexacin , tanum dnum hin statei texe , u state darnuma poxvac 
+
+
+u qani vor inqn iranov poxuma state, naev karoxan subscribei gorce ani , u gna poxi hamatasxan poxvac componentin hetevabar , erb menq amen mi katarvac popoxutyan hamar vercnum u taza nkarumeinq amboxj eje (rerenderEntiredTree()) el da mez petq chi menq mi angam nkarumenq u verj inqe aftomat sax kani __)))) 

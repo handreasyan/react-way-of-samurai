@@ -1,0 +1,47 @@
+.photo {
+  width: 50px;
+}
+.user_block {
+  display: flex;
+}
+.user_img_cont {
+  width: 20%;
+  padding: 5px 0 5px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.user_btn {
+  padding: 2px 5px;
+  border-radius: 5px;
+  color: white;
+  background-color: yellowgreen;
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+}
+.user_desc {
+  margin: 0 0 20px 20px;
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  border-radius: 10px;
+  border: 2px solid silver;
+  justify-content: space-between;
+  color: white;
+  font-weight: 800;
+  line-height: 30px;
+}
+.selectedPage {
+  font-weight: 800;
+  font-size: 16px;
+}
+.paginationSpan {
+  border: 1px solid red;
+  display: inline-block;
+  padding: 2px;
+  margin-left: 10px;
+  cursor: pointer;
+  margin-bottom: 15px;
+}

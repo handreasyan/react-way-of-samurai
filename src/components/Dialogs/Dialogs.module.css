@@ -1,0 +1,39 @@
+.dialogs {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+.dialogs_items {
+  border-right: 3px solid white;
+}
+.messages {
+  padding-left: 10px;
+}
+.textArea {
+  background-color: rgba(176, 38, 240, 0.5);
+  color: purple;
+  border-radius: 10px;
+  padding: 5px;
+  resize: vertical;
+  border: none;
+  outline: none;
+  margin-top: 50px;
+  width: 100%;
+}
+.textArea:focus {
+  color: white;
+  box-shadow: 0 0 10px purple;
+}
+.textArea_but {
+  font-weight: 800;
+  border-radius: 10px;
+  background-color: blue;
+  color: white;
+  margin-top: 5px;
+  padding: 5px 15px;
+  border: none;
+  box-shadow: 2px 2px 2px purple;
+  cursor: pointer;
+}
+.textArea_but:active {
+  box-shadow: none;
+}

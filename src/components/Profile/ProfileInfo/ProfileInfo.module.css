@@ -1,0 +1,40 @@
+.header_img_container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 150px;
+}
+.header_img {
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.user_img_name_content {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.user_img {
+  margin-top: -40px;
+  position: relative;
+  z-index: 10;
+  width: 60px;
+  height: 60px;
+}
+.user_name {
+  padding-top: 5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: white;
+  word-spacing: 10px;
+  letter-spacing: 1px;
+}
+.user_desc {
+  padding-top: 5px;
+  width: 100%;
+  color: white;
+}

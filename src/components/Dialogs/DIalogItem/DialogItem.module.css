@@ -1,0 +1,24 @@
+.dialog {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border-bottom: 1px solid white;
+  width: 80%;
+}
+
+.dialog a {
+  padding: 5px;
+  font-weight: 800;
+  color: white;
+  font-size: 16px;
+  text-decoration: none;
+  margin-left: 10px;
+}
+.dialog a:active {
+  color: purple;
+}
+.dialog img {
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+}

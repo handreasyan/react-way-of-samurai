@@ -1,0 +1,2 @@
+serveri het ashxatelu hamar petqa ogtagorcenq axaj zaprosner , nu gitenq fetche , XML requeste bayc ka mi aveli harmar tarberak ` axios , nax iran petqa intall anenq `` 
+npm install axios --save  __ u petqa iran impoert anenq bayc impoert anum ira bolor export aracnere mi anui mej aysinqn ` import * as axios from "axios"; u  verj inqe ustanovka exav hima karanq ogtagorcenq iran , axiosnel fetchi nman veradarcnuma promis  u karanq ogtvenq et promisic , uxxaki axiosi vra petqa nshenq te inj zaprosenq uzum anenq axios.get(), axios.post() ev mnacace 
