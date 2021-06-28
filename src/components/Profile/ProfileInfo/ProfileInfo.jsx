@@ -41,5 +41,3 @@ function ProfileInfo(props) {
 }
 
 export default ProfileInfo;
-
-//lesson 60

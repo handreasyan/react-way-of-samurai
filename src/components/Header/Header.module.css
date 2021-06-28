@@ -1,9 +1,10 @@
 .header {
   background-color: #8a2be2;
   grid-area: h;
-  padding: 5px;
+  padding: 5px 30px 5px 5px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 .img_block {
   width: 60px;
@@ -19,4 +20,17 @@
   font-size: 26px;
   color: blue;
   margin-left: 15px;
+}
+.loginBlock {
+  display: flex;
+  align-items: center;
+  color: white;
+}
+.loginBlock a {
+  color: white;
+  font-size: 20px;
+}
+.loginBlock img {
+  width: 50px;
+  height: 50px;
 }

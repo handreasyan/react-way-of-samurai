@@ -21,6 +21,9 @@
   border: none;
   cursor: pointer;
 }
+.user_btn:disabled {
+  background-color: red;
+}
 .user_desc {
   margin: 0 0 20px 20px;
   width: 100%;

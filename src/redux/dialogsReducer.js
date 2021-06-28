@@ -74,5 +74,3 @@ export const enterNewMessageActionCreator = (post) => ({
 });
 
 export default dialogsReducer;
-
-// Lesson N48 (piti nayem ) ,, bayc 45,47 dasere(connect) mi hatel arji nayac, 46 hech objectneri copy i masina
