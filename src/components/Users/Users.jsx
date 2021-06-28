@@ -1,7 +1,7 @@
 import styles from "./Users.module.css";
 import userPhoto from "../../assets/images/user_img.png";
 import { NavLink } from "react-router-dom";
-import * as axios from "axios";
+import {follow, unFollow} from "../../api/api";
 let Users = (props) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
   let pages = [];
@@ -60,17 +60,7 @@ let Users = (props) => {
                   )}
                   onClick={() => {
                     props.toggleFollowingInProgress(true, user.id);
-                    axios
-                      .delete(
-                        `https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
-                        {
-                          withCredentials: true,
-                          headers: {
-                            "API-KEY": "2d125ff6-566c-49e6-b2b5-ccdcd757752f",
-                          },
-                        }
-                      )
-                      .then((response) => {
+                    unFollow(user.id).then((response) => {
                         if (response.data.resultCode === 0) {
                           props.unfollow(user.id);
                         } else {
@@ -90,18 +80,7 @@ let Users = (props) => {
                   )}
                   onClick={() => {
                     props.toggleFollowingInProgress(true, user.id);
-                    axios
-                      .post(
-                        `https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
-                        {},
-                        {
-                          withCredentials: true,
-                          headers: {
-                            "API-KEY": "2d125ff6-566c-49e6-b2b5-ccdcd757752f",
-                          },
-                        }
-                      )
-                      .then((response) => {
+                    follow(user.id).then((response) => {
                         if (response.data.resultCode === 0) {
                           props.follow(user.id);
                         } else {

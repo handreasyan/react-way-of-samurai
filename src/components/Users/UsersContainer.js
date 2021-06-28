@@ -1,14 +1,5 @@
 import { connect } from "react-redux";
-import {
-  follow,
-  setUsers,
-  unfollow,
-  setCurrentPage,
-  setTotalUserCount,
-  setIsFetching,
-  toggleFollowingInProgress,
-} from "../../redux/usersReducer";
-import * as axios from "axios";
+import {follow,setUsers,unfollow,setCurrentPage,setTotalUserCount,setIsFetching,toggleFollowingInProgress,} from "../../redux/usersReducer";
 import React from "react";
 import Users from "./Users";
 import Preloader from "../common/Preloader/loader";
@@ -77,34 +68,6 @@ let mapStateToProps = (state) => {
     followingInProgress: state.usersPage.followingInProgress,
   };
 };
-
-{
-  /* mdtp _ i mej tenumenq vor misht nuyn gorcoxutyunna arvum , aysinqn inqy veradarcnuma object vore uni methodner u dranq bolornel iranc mej kanchumen mer tvac actionCreatorin u iran poxancum injvor areq, bayc parzvuma vor connectin vorpes erkord arjeq mdtp i poxaren karanq poxancenq object actioncreator callbackaerov u inqy eti ira mej aftomat kpoxanci dispatchin u iran kta injvor arjeq ,, u gitrenq vor objecti mej ete key u value arjeqneri anunnere nuynnen karanq dnenq menak mi arjeq vore vor nuyne klini ham value hamar ham keyi => {name:name} === {name} ,, hetevabar karanq mer actioncreatorineri anunnernel darcnenq nenc vonc vor skzbum et anunov functionnereinq sarqel dispatchin kanchox , u vabshe henc skszbum inj vor ktnenq actionCreatori anune henc et anunnel kpoxancem mdtp i arjqe vorpes 
-
-  let mapDispatchToProps = (dispatch) => {
-    return {
-      follow: (userId) => {
-        dispatch(followAC(userId));
-      },
-      unfollow: (userId) => {
-        dispatch(unfollowAC(userId));
-      },
-      setUsers: (user) => {
-        dispatch(setUsersAC(user));
-      },
-      setCurrentPage: (currentPage) => {
-        dispatch(setCurrentPageAC(currentPage));
-      },
-      setTotalUserCount: (totalCount) => {
-        dispatch(setTotalUserCountAC(totalCount));
-      },
-      toggleIsFetching: (isFetching) => {
-        dispatch(setIsFetchingAC(isFetching));
-      },
-    };
-  };
-   */
-}
 
 export default connect(mapStateToProps, {
   follow,
