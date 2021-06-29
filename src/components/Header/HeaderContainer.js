@@ -2,16 +2,16 @@ import React from "react";
 import Header from "./Header";
 import { connect } from "react-redux";
 import { setAuthUserData, setCurrentUser } from "../../redux/authReaducer";
-import {getMyProfile, getOneUser} from "../../api/api";
+import {usersAPI} from "../../api/api";
 
 class HeaderContainer extends React.Component {
   componentDidMount() {
-    getMyProfile().then((data) => {
+    usersAPI.getMyProfile().then((data) => {
         if (data.resultCode === 0) {
           let { login, id, email } = data.data;
           this.props.setAuthUserData(id, email, login);
 
-          getOneUser(id).then((data) => {
+          usersAPI.getOneUser(id).then((data) => {
               this.props.setCurrentUser(login, data.photos.small);
             })
             .catch((error) => {

@@ -1,7 +1,6 @@
 import styles from "./Users.module.css";
 import userPhoto from "../../assets/images/user_img.png";
 import { NavLink } from "react-router-dom";
-import {follow, unFollow} from "../../api/api";
 let Users = (props) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
   let pages = [];
@@ -58,17 +57,7 @@ let Users = (props) => {
                   disabled={props.followingInProgress.some(
                     (id) => id === user.id
                   )}
-                  onClick={() => {
-                    props.toggleFollowingInProgress(true, user.id);
-                    unFollow(user.id).then((response) => {
-                        if (response.data.resultCode === 0) {
-                          props.unfollow(user.id);
-                        } else {
-                          alert("Please Log In");
-                        }
-                        props.toggleFollowingInProgress(false, user.id);
-                      });
-                  }}
+                  onClick={() => props.unfollow(user.id)}
                   className={styles.user_btn}
                 >
                   Unfollow
@@ -78,18 +67,7 @@ let Users = (props) => {
                   disabled={props.followingInProgress.some(
                     (id) => id === user.id
                   )}
-                  onClick={() => {
-                    props.toggleFollowingInProgress(true, user.id);
-                    follow(user.id).then((response) => {
-                        if (response.data.resultCode === 0) {
-                          props.follow(user.id);
-                        } else {
-                          alert("Please Log In");
-                        }
-
-                        props.toggleFollowingInProgress(false, user.id);
-                      });
-                  }}
+                  onClick={() => props.follow(user.id)}
                   className={styles.user_btn}
                 >
                   Follow
