@@ -13,13 +13,17 @@ export const usersAPI = {
   getOneUser:(userId) => {
     return instance.get(`profile/${userId}`).then((response) => response.data);
   },
-  getMyProfile:() => {
-    return instance.get(`auth/me`).then((response) => response.data);
-  },
   unFollow:(id)=> {
     return instance.delete(`follow/${id}`)
   },
   follow:(id) => {
     return instance.post(`follow/${id}`)
   }
+}
+
+export const authAPI = {
+  me:() => {
+    return instance.get(`auth/me`).then((response) => response.data);
+  },
+
 }
