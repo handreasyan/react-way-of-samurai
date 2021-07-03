@@ -4,6 +4,8 @@ import { follow, unfollow, setCurrentPage,toggleFollowingInProgress,
 import React from "react";
 import Users from "./Users";
 import Preloader from "../common/Preloader/loader";
+import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
+import {compose} from "redux";
 
 class UsersContainer extends React.Component {
   componentDidMount() {
@@ -31,7 +33,7 @@ class UsersContainer extends React.Component {
   }
 }
 
-let mapStateToProps = (state) => {
+let mstp = (state) => {  // mapStateToProps
   return {
     users: state.usersPage.users,
     pageSize: state.usersPage.pageSize,
@@ -41,6 +43,6 @@ let mapStateToProps = (state) => {
     followingInProgress: state.usersPage.followingInProgress,
   };
 };
+let mdtp = {follow,unfollow,setCurrentPage,toggleFollowingInProgress,getUsers}; // mapDIspatchToProps
 
-export default connect(mapStateToProps,
-  {follow,unfollow,setCurrentPage,toggleFollowingInProgress,getUsers})(UsersContainer);
+export default compose(WithAuthRedirect,connect(mstp,mdtp))(UsersContainer)

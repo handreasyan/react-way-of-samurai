@@ -1,5 +1,6 @@
 import Preloader from "../../common/Preloader/loader";
 import styles from "./ProfileInfo.module.css";
+import ProfileStatus from "./ProfileStatus";
 
 function ProfileInfo(props) {
   if (!props.profile) {
@@ -11,15 +12,17 @@ function ProfileInfo(props) {
   }
   return (
     <div>
-      <div className={styles.header_img_container}>
-        <img
-          src={
-            "https://i.pinimg.com/originals/56/3a/db/563adbeb015fb165c4145a28a6c2e4c8.jpg"
-          }
-          className={styles.header_img}
-          alt="Profile"
-        />
-      </div>
+      <>
+      {/*<div className={styles.header_img_container}>*/}
+      {/*  <img*/}
+      {/*    src={*/}
+      {/*      "https://i.pinimg.com/originals/56/3a/db/563adbeb015fb165c4145a28a6c2e4c8.jpg"*/}
+      {/*    }*/}
+      {/*    className={styles.header_img}*/}
+      {/*    alt="Profile"*/}
+      {/*  />*/}
+      {/*</div>*/}
+      </>
       <div className={styles.user_img_name_content}>
         <img
           src={props.profile.photos.small}
@@ -35,6 +38,7 @@ function ProfileInfo(props) {
             {props.profile.lookingForAJobDescription}
           </div>
         </div>
+        <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus}/>
       </div>
     </div>
   );

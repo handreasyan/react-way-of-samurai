@@ -38,3 +38,9 @@
   width: 100%;
   color: white;
 }
+.defStatusContent {
+  background: blueviolet;
+  padding: 5px 10px;
+  width: 40%;
+  color: white;
+}
