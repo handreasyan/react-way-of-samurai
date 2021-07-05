@@ -1,4 +1,4 @@
-const ENTER_MESSAGE = "ENTER-MESSAGE";
+
 const ADD_NEW_MESSAGE = "ADD-NEW-MESSAGE";
 
 let initialState = {
@@ -39,24 +39,16 @@ let initialState = {
     { id: 2, message: "Where are you ?" },
     { id: 3, message: "Do you love me ?" },
     { id: 4, message: "Hello ,Where are you ?" },
-  ],
-  newMessageText: "",
+  ]
 };
 
 const dialogsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ENTER_MESSAGE:
-      return {
-        ...state,
-        newMessageText: action.text,
-      };
-
     case ADD_NEW_MESSAGE:
-      let text = state.newMessageText;
+      let text = action.newMessageBody;
       let newId = Math.floor(Math.random() * 1000);
       return {
         ...state,
-        newMessageText: "",
         messagesData: [...state.messagesData, { id: newId, message: text }],
       };
 
@@ -65,12 +57,10 @@ const dialogsReducer = (state = initialState, action) => {
   }
 };
 
-export const addNewMessageActionCreator = () => ({
+export const addNewMessageActionCreator = (newMessageBody) => ({
   type: ADD_NEW_MESSAGE,
+  newMessageBody
 });
-export const enterNewMessageActionCreator = (post) => ({
-  type: ENTER_MESSAGE,
-  text: post,
-});
+
 
 export default dialogsReducer;

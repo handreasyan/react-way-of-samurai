@@ -41,6 +41,9 @@
 .defStatusContent {
   background: blueviolet;
   padding: 5px 10px;
-  width: 40%;
+  width: 90%;
+  margin:20px 0 ;
   color: white;
+}
+.profileInfo {
 }
