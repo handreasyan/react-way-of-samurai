@@ -1,11 +1,10 @@
 import { connect } from "react-redux";
-import { follow, unfollow, setCurrentPage,toggleFollowingInProgress,
-                             getUsers,} from "../../redux/usersReducer";
+import { follow, unfollow, setCurrentPage,toggleFollowingInProgress,requestUsers,} from "../../redux/usersReducer";
 import React from "react";
 import Users from "./Users";
 import Preloader from "../common/Preloader/loader";
-import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
-import {compose} from "redux";
+import {getCurrentPageSel, getFollowingInProgressSel, getIsFetchingSel,
+  getPageSizeSel, getTotalUsersCountSel, getUsersSel} from "../../redux/users-selectors";
 
 class UsersContainer extends React.Component {
   componentDidMount() {
@@ -33,16 +32,21 @@ class UsersContainer extends React.Component {
   }
 }
 
+
+
 let mstp = (state) => {  // mapStateToProps
   return {
-    users: state.usersPage.users,
-    pageSize: state.usersPage.pageSize,
-    totalUsersCount: state.usersPage.totalUsersCount,
-    currentPage: state.usersPage.currentPage,
-    isFetching: state.usersPage.isFetching,
-    followingInProgress: state.usersPage.followingInProgress,
+    users: getUsersSel(state),
+    pageSize: getPageSizeSel(state),
+    totalUsersCount: getTotalUsersCountSel(state),
+    currentPage: getCurrentPageSel(state),
+    isFetching: getIsFetchingSel(state),
+    followingInProgress: getFollowingInProgressSel(state),
   };
 };
-let mdtp = {follow,unfollow,setCurrentPage,toggleFollowingInProgress,getUsers}; // mapDIspatchToProps
 
-export default compose(WithAuthRedirect,connect(mstp,mdtp))(UsersContainer)
+
+
+let mdtp = {follow,unfollow,setCurrentPage,toggleFollowingInProgress,getUsers: requestUsers}; // mapDIspatchToProps
+
+export default connect(mstp,mdtp)(UsersContainer)
