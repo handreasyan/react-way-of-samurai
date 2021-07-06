@@ -12,4 +12,4 @@ let mdtp = (dispatch) => { //mapDispatchToProps
 };
 
 
-export default compose(connect(mstp, mdtp),WithAuthRedirect,)(Dialogs);
+export default compose(connect(mstp, mdtp),WithAuthRedirect)(Dialogs);

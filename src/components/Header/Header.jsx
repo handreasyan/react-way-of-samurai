@@ -1,11 +1,12 @@
 import classes from "./Header.module.css";
 import { NavLink } from "react-router-dom";
+
 const Header = (props) => {
   function setUserNameAndPhoto() {
     if (props.isAuth) {
       return (
         <div className={classes.loginBlock}>
-          <div>{props.userName}</div>
+          <div>{props.login}</div>
           <img
             src={
               props.userPhoto
@@ -14,10 +15,11 @@ const Header = (props) => {
             }
             alt="UserIMG"
           />
+          <button onClick={props.logout}>Log Out</button>
         </div>
-      );
+      )
     } else {
-      <NavLink to={"/login"}>Log In</NavLink>;
+      return <NavLink to={"/login"}>Log In</NavLink>;
     }
   }
 
