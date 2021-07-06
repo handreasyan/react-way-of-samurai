@@ -32,6 +32,7 @@ class UsersContainer extends React.Component {
   }
 }
 
+// lesson 84 (83) connect reselect lib
 
 
 let mstp = (state) => {  // mapStateToProps

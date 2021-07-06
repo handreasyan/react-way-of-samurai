@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from "./ProfileInfo.module.css";
 
+
+// sa petq chi , lriv poxelem grel Hook _ erov , ProfileStatusWithHooks filena arden actual
 class ProfileStatus extends React.Component {
   state = {
     editMode:false,
