@@ -1,10 +1,9 @@
 import Preloader from "../../common/Preloader/loader";
 import styles from "./ProfileInfo.module.css";
-import ProfileStatus from "./ProfileStatus";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
-function ProfileInfo(props) {
-  if (!props.profile) {
+function ProfileInfo({profile,updateUserStatus,status}) {
+  if (!profile) {
     return (
       <div>
         <Preloader/> Loading
@@ -15,21 +14,21 @@ function ProfileInfo(props) {
     <div className={styles.profileInfo}>
       <div className={styles.user_img_name_content}>
         <img
-          src={props.profile.photos.small}
+          src={profile.photos.small}
           className={styles.user_img}
           alt="Profile_Photo"
         />
-        <span className={styles.user_name}>{props.profile.fullName}</span>
+        <span className={styles.user_name}>{profile.fullName}</span>
         <div className={styles.user_desc}>
           <b>STATUS:</b>
-          {props.profile.aboutMe},
+          {profile.aboutMe},
           <div>
             <b>Looking For Job: </b>
-            {props.profile.lookingForAJobDescription}
+            {profile.lookingForAJobDescription}
           </div>
         </div>
       </div>
-      <ProfileStatusWithHooks status={props.status} updateUserStatus={props.updateUserStatus}/>
+      <ProfileStatusWithHooks status={status} updateUserStatus={updateUserStatus}/>
     </div>
   );
 }

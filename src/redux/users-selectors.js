@@ -4,7 +4,6 @@ export const getUsersSel = (state) => {
   return state.usersPage.users
 }
 
-
 export const getPageSizeSel = (state) => {
   return state.usersPage.pageSize
 }

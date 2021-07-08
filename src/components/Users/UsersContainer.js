@@ -1,22 +1,27 @@
-import { connect } from "react-redux";
-import { follow, unfollow, setCurrentPage,toggleFollowingInProgress,requestUsers,} from "../../redux/usersReducer";
+import {connect} from "react-redux";
+import {follow, requestUsers, setCurrentPage, toggleFollowingInProgress, unfollow,} from "../../redux/usersReducer";
 import React from "react";
 import Users from "./Users";
 import Preloader from "../common/Preloader/loader";
-import {getCurrentPageSel, getFollowingInProgressSel, getIsFetchingSel,
+import { getCurrentPageSel,getFollowingInProgressSel,getIsFetchingSel,
   getPageSizeSel, getTotalUsersCountSel, getUsersSel} from "../../redux/users-selectors";
 
 class UsersContainer extends React.Component {
+
   componentDidMount() {
-    this.props.getUsers(this.props.currentPage,this.props.pageSize)
+    const {getUsers,currentPage,pageSize} = this.props
+    getUsers(currentPage,pageSize)
   }
+
   onPageChanged = (pageNumber) => {
-    this.props.getUsers(pageNumber,this.props.pageSize)
+    const {getUsers,pageSize} = this.props
+    getUsers(pageNumber, pageSize)
   };
+
   render() {
     return (
       <>
-        {this.props.isFetching ? <Preloader /> : null}
+        {this.props.isFetching ? <Preloader/> : null}
         <Users
           totalUsersCount={this.props.totalUsersCount}
           pageSize={this.props.pageSize}
@@ -32,9 +37,6 @@ class UsersContainer extends React.Component {
   }
 }
 
-// lesson 84 (83) connect reselect lib
-
-
 let mstp = (state) => {  // mapStateToProps
   return {
     users: getUsersSel(state),
@@ -47,7 +49,6 @@ let mstp = (state) => {  // mapStateToProps
 };
 
 
+let mdtp = {follow, unfollow, setCurrentPage, toggleFollowingInProgress, getUsers: requestUsers}; // mapDIspatchToProps
 
-let mdtp = {follow,unfollow,setCurrentPage,toggleFollowingInProgress,getUsers: requestUsers}; // mapDIspatchToProps
-
-export default connect(mstp,mdtp)(UsersContainer)
+export default connect(mstp, mdtp)(UsersContainer)

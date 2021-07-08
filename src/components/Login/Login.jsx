@@ -8,10 +8,9 @@ import {Redirect} from "react-router-dom";
 import styles from '../common/FormsControls/FormsControl.module.css'
 
 
-const LoginForm = (props) => {
-
+const LoginForm = ({handleSubmit,error}) => {
   return (
-    <form onSubmit={props.handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <div>
         <Field placeholder={'Email'} component={Input} name={'email'} validate={[required]}/>
       </div>
@@ -21,23 +20,21 @@ const LoginForm = (props) => {
       <div>
         <Field name={'rememberMe'} type="checkbox"  component={Input} /> Remember Me
       </div>
-      {props.error && <div className={styles.formSummaryError}>{props.error}</div>}
-      <div>
-        <button>Login</button>
-      </div>
+      {error && <div className={styles.formSummaryError}>{error}</div>}
+      <div> <button>Login</button> </div>
     </form>
   );
 };
 
 const LoginReduxForm = reduxForm({form:'login'})(LoginForm);
 
-const Login = (props) => {
+const Login = ({login,isAuth}) => {
 
   const onSubmit = (formData) => {
-    props.login(formData.email,formData.password,formData.rememberMe)
+    login(formData.email,formData.password,formData.rememberMe)
   }
 
-  if(props.isAuth) return <Redirect to={'/profile'}/>
+  if(isAuth) return <Redirect to={'/profile'}/>
 
   return (
     <div>

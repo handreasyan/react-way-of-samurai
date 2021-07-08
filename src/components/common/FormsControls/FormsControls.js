@@ -1,4 +1,3 @@
-
 import styles from './FormsControl.module.css'
 import React from "react";
 
@@ -15,6 +14,4 @@ const Element = (Element) => ({ input, meta, ...props }) => {
 
 export const Textarea = Element("textarea");
 export const Input = Element("input");
-
-
 
