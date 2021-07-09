@@ -1,0 +1,1 @@
+{"version":3,"sources":["components/Music/Music.jsx"],"names":["Music","props"],"mappings":"kIAMeA,UAJD,SAACC,GACb,OAAO","file":"static/js/4.2638031c.chunk.js","sourcesContent":["//import styles from \"./Music.module.css\";\r\n\r\nconst Music = (props) => {\r\n  return <div>Music</div>;\r\n};\r\n\r\nexport default Music;\r\n"],"sourceRoot":""}

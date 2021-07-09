@@ -1,0 +1,2 @@
+(this.webpackJsonpfirst_project=this.webpackJsonpfirst_project||[]).push([[5],{294:function(t,s,e){"use strict";e.r(s);var r=e(0);s.default=function(t){return Object(r.jsx)("div",{children:"News"})}}}]);
+//# sourceMappingURL=5.e7f0439d.chunk.js.map

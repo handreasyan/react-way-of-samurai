@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.css": "/react-way-of-samurai/static/css/main.f00277e3.chunk.css",
+    "main.js": "/react-way-of-samurai/static/js/main.56488598.chunk.js",
+    "main.js.map": "/react-way-of-samurai/static/js/main.56488598.chunk.js.map",
+    "runtime-main.js": "/react-way-of-samurai/static/js/runtime-main.131f8057.js",
+    "runtime-main.js.map": "/react-way-of-samurai/static/js/runtime-main.131f8057.js.map",
+    "static/js/2.86bfddee.chunk.js": "/react-way-of-samurai/static/js/2.86bfddee.chunk.js",
+    "static/js/2.86bfddee.chunk.js.map": "/react-way-of-samurai/static/js/2.86bfddee.chunk.js.map",
+    "static/css/3.783d2894.chunk.css": "/react-way-of-samurai/static/css/3.783d2894.chunk.css",
+    "static/js/3.0b74c918.chunk.js": "/react-way-of-samurai/static/js/3.0b74c918.chunk.js",
+    "static/js/3.0b74c918.chunk.js.map": "/react-way-of-samurai/static/js/3.0b74c918.chunk.js.map",
+    "static/js/4.2638031c.chunk.js": "/react-way-of-samurai/static/js/4.2638031c.chunk.js",
+    "static/js/4.2638031c.chunk.js.map": "/react-way-of-samurai/static/js/4.2638031c.chunk.js.map",
+    "static/js/5.e7f0439d.chunk.js": "/react-way-of-samurai/static/js/5.e7f0439d.chunk.js",
+    "static/js/5.e7f0439d.chunk.js.map": "/react-way-of-samurai/static/js/5.e7f0439d.chunk.js.map",
+    "static/js/6.7466afd9.chunk.js": "/react-way-of-samurai/static/js/6.7466afd9.chunk.js",
+    "static/js/6.7466afd9.chunk.js.map": "/react-way-of-samurai/static/js/6.7466afd9.chunk.js.map",
+    "index.html": "/react-way-of-samurai/index.html",
+    "static/css/3.783d2894.chunk.css.map": "/react-way-of-samurai/static/css/3.783d2894.chunk.css.map",
+    "static/css/main.f00277e3.chunk.css.map": "/react-way-of-samurai/static/css/main.f00277e3.chunk.css.map",
+    "static/js/2.86bfddee.chunk.js.LICENSE.txt": "/react-way-of-samurai/static/js/2.86bfddee.chunk.js.LICENSE.txt",
+    "static/media/loader.a1a99674.gif": "/react-way-of-samurai/static/media/loader.a1a99674.gif",
+    "static/media/user_img.e8ac51ee.png": "/react-way-of-samurai/static/media/user_img.e8ac51ee.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.131f8057.js",
+    "static/js/2.86bfddee.chunk.js",
+    "static/css/main.f00277e3.chunk.css",
+    "static/js/main.56488598.chunk.js"
+  ]
+}
