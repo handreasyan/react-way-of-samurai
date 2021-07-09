@@ -2,7 +2,7 @@
   "name": "first_project",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://handreasyan.github.io/wayOfSamuraiJSSocialMedia/",
+  "homepage": "https://handreasyan.github.io/react-way-of-samurai/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",

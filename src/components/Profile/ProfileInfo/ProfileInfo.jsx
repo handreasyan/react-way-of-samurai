@@ -1,8 +1,9 @@
 import Preloader from "../../common/Preloader/loader";
 import styles from "./ProfileInfo.module.css";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
+import userPhoto from "../../../assets/images/user_img.png";
 
-function ProfileInfo({profile,updateUserStatus,status}) {
+function ProfileInfo({profile, updateUserStatus, status, isOwner}) {
   if (!profile) {
     return (
       <div>
@@ -13,22 +14,19 @@ function ProfileInfo({profile,updateUserStatus,status}) {
   return (
     <div className={styles.profileInfo}>
       <div className={styles.user_img_name_content}>
-        <img
-          src={profile.photos.small}
-          className={styles.user_img}
-          alt="Profile_Photo"
-        />
-        <span className={styles.user_name}>{profile.fullName}</span>
-        <div className={styles.user_desc}>
-          <b>STATUS:</b>
-          {profile.aboutMe},
-          <div>
-            <b>Looking For Job: </b>
-            {profile.lookingForAJobDescription}
-          </div>
+        <div>
+          <img src={profile.photos.small || userPhoto} className={styles.user_img} alt="Profile_Photo" />
+          {isOwner && <input type='file'/>}
         </div>
+        <span className={styles.user_name}>{profile.fullName}</span>
       </div>
-      <ProfileStatusWithHooks status={status} updateUserStatus={updateUserStatus}/>
+
+      <ProfileStatusWithHooks status={status}  lookingForAJobDescription={profile.lookingForAJobDescription}  updateUserStatus={updateUserStatus}/>
+
+      <div className={styles.user_desc}>
+        <b>STATUS:</b>
+        {profile.aboutMe},
+      </div>
     </div>
   );
 }

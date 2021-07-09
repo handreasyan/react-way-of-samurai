@@ -27,6 +27,10 @@ const ProfileStatusWithHooks = (props) => {
             editMode &&
             <input type="text" value={status} onBlur={deactivateEditMode} onChange={onStatusChange} autoFocus={true}/>
           }
+          <div>
+            <b>Looking For Job: </b>
+            {props.lookingForAJobDescription}
+          </div>
         </div>
       </div>
     );
