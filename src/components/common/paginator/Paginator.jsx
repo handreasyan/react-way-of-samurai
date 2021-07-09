@@ -1,43 +1,36 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styles from "./paginator.module.css";
 
 export const Paginator = ({totalUsersCount,pageSize,currentPage,onPageChanged}) => {
-  let pagesCount = Math.ceil(totalUsersCount / pageSize);
-  let pages = [];
+  const pagesCount = Math.ceil(totalUsersCount / pageSize);
+  const paginatorPagesCount = 10;
 
-  for (let i = 1; i <= pagesCount; i++) {
-    pages.push(i);
-  }
-
-  // vor ejis vra shat spaner chereva minjev klucenq sra xnidre
-
-  const spans = pages.map((p) => {
+  const pages = Array(pagesCount).fill('').map((_,i) => {
     return (
-      <span
-        key={p}
-        className={
-          styles.paginationSpan +
-          " " +
-          (currentPage === p && styles.selectedPage)
-        }
-        onClick={() => onPageChanged(p)}
-      >
-        {p}
-      </span>
+      <span key={i} onClick={() => onPageChanged(i+1)}
+        className={`${styles.paginationSpan} ${currentPage === (i+1) && styles.selectedPage}`}
+      > { (i+1) } </span>
     );
   });
-  const spansShowFunc = () => {
-    let newArr = [];
-    if (spans.length > 10) {
-      for (let i = 10; i < 110; i++) {
-        newArr.push(spans[i]);
-      }
-    }
-    return newArr;
-  };
+
+  const showLessSpans = num => pages.slice(num,num + 10)
+  const nextPage = () => {
+    const changedPost = lastPage + paginatorPagesCount + 1
+    onPageChanged(changedPost)
+    setLastPage(p => p + paginatorPagesCount)
+  }
+  const prevPage = () => {
+    const changedPost = lastPage + paginatorPagesCount + 1
+    onPageChanged(changedPost)
+    setLastPage(p => p - paginatorPagesCount)
+  }
+  const [lastPage,setLastPage] = useState(0);
+
   return (
-    <div>
-      {spansShowFunc()}
+    <div className={styles.paginator}>
+      {lastPage > (paginatorPagesCount - 1) ? <button onClick={prevPage}>PREVIOUS</button> : ''}
+      {showLessSpans(lastPage)}
+      {lastPage < pages.length - paginatorPagesCount ? <button onClick={nextPage}>NEXT</button> : ''}
     </div>
   );
 };
