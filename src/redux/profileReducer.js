@@ -1,9 +1,11 @@
 import {profileAPI, usersAPI} from "../api/api";
+import {stopSubmit} from "redux-form";
 
 const ADD_POST = "ADD-POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const SET_STATUS = "SET_STATUS";
 const DELETE_POST = "DELETE_POST";
+const SAVE_PHOTO_SUCCESS = "SAVE_PHOTO_SUCCESS";
 
 let initialState = {
   postsData: [
@@ -63,6 +65,11 @@ const profileReducer = (state = initialState, action) => {
         ...state,
         postsData: state.postsData.filter(post => post.id !== action.postId)
       }
+    case SAVE_PHOTO_SUCCESS:
+      return {
+        ...state,
+        profile: {...state.profile,photos:action.photos},
+      }
     default:
       return state;
   }
@@ -73,6 +80,7 @@ export const addPostActionCreator = (newPostText) => ({type: ADD_POST, newPostTe
 export const setStatus = (status) => ({type: SET_STATUS, status});
 export const deletePost = (postId) => ({type: DELETE_POST, postId});
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile,});
+export const savePhotoSuccess = (photos) => ({type: SAVE_PHOTO_SUCCESS, photos});
 export const getUserProfile = (userId) => async (dispatch) => {
   const data = await usersAPI.getOneUser(userId);
   dispatch(setUserProfile(data));
@@ -86,6 +94,27 @@ export const updateUserStatus = (status) => async (dispatch) => {
   if (data.resultCode === 0) {
     dispatch(setStatus(status));
   } else {
-    console.warn('Some Error')
+    console.warn('Some Error in Profile Reducer 1 ')
+  }
+}
+
+export const savePhoto = (file) => async (dispatch) => {
+  const data = await profileAPI.savePhoto(file);
+  if (data.resultCode === 0) {
+    dispatch(savePhotoSuccess(data.data.photos));
+  } else {
+    console.warn('Some Error in Profile Reducer 2')
+  }
+}
+
+export const saveProfile = (profile) => async (dispatch,getState) => {
+  const id = getState().auth.userId
+  const data = await profileAPI.saveProfile(profile);
+  if (data.resultCode === 0) {
+   dispatch(getUserProfile(id));
+  } else {
+    dispatch(stopSubmit("editProfile",{_error:data.messages[0]}))
+    console.warn('Some Error in Profile Reducer 2')
+    return Promise.reject(data.messages[0])
   }
 }

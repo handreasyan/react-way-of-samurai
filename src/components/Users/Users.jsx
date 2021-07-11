@@ -2,7 +2,6 @@ import Paginator from "../common/paginator/Paginator";
 import User from "./User";
 
 let Users = ({users, followingInProgress, unfollow,follow,...paginatorProps}) => {
-  console.log(users)
   return (
     <div>
       <Paginator  {...paginatorProps}/>

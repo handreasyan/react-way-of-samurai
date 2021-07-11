@@ -4,7 +4,7 @@ import styles from "./paginator.module.css";
 export const Paginator = ({totalUsersCount,pageSize,currentPage,onPageChanged}) => {
   const pagesCount = Math.ceil(totalUsersCount / pageSize);
   const paginatorPagesCount = 10;
-  ////
+
   const pages = Array(pagesCount).fill('').map((_,i) => {
     return (
       <span key={i} onClick={() => onPageChanged(i+1)}
