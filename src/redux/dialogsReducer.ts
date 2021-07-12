@@ -1,6 +1,16 @@
 
 const ADD_NEW_MESSAGE = "ADD-NEW-MESSAGE";
 
+type DialogType =  {
+  id:number,
+  name:string,
+  src:string
+}
+type MessageType =  {
+  id:number,
+  message:string,
+}
+
 let initialState = {
   dialogsData: [
     {
@@ -32,17 +42,18 @@ let initialState = {
       name: "Mike",
       src: "https://cdn1.flamp.ru/cbdfd4792aaddd457030e8f03b7b7b63.png",
     },
-  ],
-
+  ] as Array<DialogType>,
   messagesData: [
     { id: 1, message: "Hello , How are you ?" },
     { id: 2, message: "Where are you ?" },
     { id: 3, message: "Do you love me ?" },
     { id: 4, message: "Hello ,Where are you ?" },
-  ]
+  ] as Array<MessageType>
 };
 
-const dialogsReducer = (state = initialState, action) => {
+export type initialStateType = typeof initialState
+
+const dialogsReducer = (state:initialStateType = initialState, action:any):initialStateType => {
   switch (action.type) {
     case ADD_NEW_MESSAGE:
       let text = action.newMessageBody;
@@ -57,7 +68,12 @@ const dialogsReducer = (state = initialState, action) => {
   }
 };
 
-export const addNewMessageActionCreator = (newMessageBody) => ({
+type addNewMessageActionType = {
+  type: typeof ADD_NEW_MESSAGE,
+  newMessageBody:string
+}
+
+export const addNewMessageActionCreator = (newMessageBody:string):addNewMessageActionType => ({
   type: ADD_NEW_MESSAGE,
   newMessageBody
 });
