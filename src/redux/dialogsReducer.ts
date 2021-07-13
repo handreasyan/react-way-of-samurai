@@ -51,9 +51,9 @@ let initialState = {
   ] as Array<MessageType>
 };
 
-export type initialStateType = typeof initialState
+export type DialogsInitialStateType = typeof initialState
 
-const dialogsReducer = (state:initialStateType = initialState, action:any):initialStateType => {
+const dialogsReducer = (state:DialogsInitialStateType = initialState, action:any):DialogsInitialStateType => {
   switch (action.type) {
     case ADD_NEW_MESSAGE:
       let text = action.newMessageBody;

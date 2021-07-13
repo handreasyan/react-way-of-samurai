@@ -1,6 +1,7 @@
 import loader from "../../../assets/images/loader.gif";
 
-const Preloader = (props) => {
+
+const Preloader:React.FunctionComponent = () => {
   return (
     <div
       style={{

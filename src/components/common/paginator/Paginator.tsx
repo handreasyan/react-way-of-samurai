@@ -1,11 +1,18 @@
-import React, {useState} from 'react';
+import React, {ReactNode, useState} from 'react';
 import styles from "./paginator.module.css";
 
-export const Paginator = ({totalUsersCount,pageSize,currentPage,onPageChanged}) => {
+type PropsType = {
+  totalUsersCount:number,
+  pageSize:number,
+  currentPage:number,
+  onPageChanged:(pageNumber:number)=>void
+}
+
+export const Paginator:React.FC<PropsType> = ({totalUsersCount,pageSize,currentPage,onPageChanged}:PropsType) => {
   const pagesCount = Math.ceil(totalUsersCount / pageSize);
   const paginatorPagesCount = 10;
 
-  const pages = Array(pagesCount).fill('').map((_,i) => {
+  const pages:Array<ReactNode> = Array(pagesCount).fill('').map((_,i) => {
     return (
       <span key={i} onClick={() => onPageChanged(i+1)}
         className={`${styles.paginationSpan} ${currentPage === (i+1) && styles.selectedPage}`}
@@ -13,7 +20,7 @@ export const Paginator = ({totalUsersCount,pageSize,currentPage,onPageChanged}) 
     );
   });
 
-  const showLessSpans = num => pages.slice(num,num + 10)
+  const showLessSpans = (num:number) => pages.slice(num,num + 10)
   const nextPage = () => {
     const changedPost = lastPage + paginatorPagesCount + 1
     onPageChanged(changedPost)
