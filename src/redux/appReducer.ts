@@ -1,4 +1,5 @@
 import {getAuthUserData} from "./authReaducer";
+import {Dispatch} from "redux";
 
 const INITIALIZED_SUCCESS = "INITIALIZED_SUCCESS";
 
@@ -27,6 +28,7 @@ type initializedSuccessActionType = {
   type:typeof INITIALIZED_SUCCESS;
 }
 export const initializedSuccess = ():initializedSuccessActionType => ({type: INITIALIZED_SUCCESS});
+
 
 export const initializeApp = () => (dispatch:any) => {
   let promise = dispatch(getAuthUserData());

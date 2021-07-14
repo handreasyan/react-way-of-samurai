@@ -1,4 +1,7 @@
-import * as axios from "axios";
+import axios from "axios";
+import {ProfileType} from "../types/types";
+
+// next lesson 08 => https://youtu.be/Vaa8iuN1YFE?list=PLcvhF2Wqh7DM3z1XqMw0kPuxpbyMo3HvN
 
 const instance = axios.create({
   baseURL:'https://social-network.samuraijs.com/api/1.0/',
@@ -7,60 +10,79 @@ const instance = axios.create({
 })
 
 export const usersAPI = {
-  getUsers:(currentPage = 1, pageSize = 10) => {
+  getUsers(currentPage = 1, pageSize = 10){
     return instance.get(`users?page=${currentPage}&count=${pageSize}`).then((response) => response.data);
   },
-  getOneUser:(userId) => {
+  getOneUser(userId:number){
     return profileAPI.getProfile(userId)
     console.warn("You use the old version for getProfile Method : ./src/api/api.js")
     //return instance.get(`profile/${userId}`).then((response) => response.data);
   },
-  unFollow:(id)=> {
+  unFollow(id:number){
     return instance.delete(`follow/${id}`)
   },
-  follow:(id) => {
+  follow(id:number){
     return instance.post(`follow/${id}`)
   }
 }
 
+export enum ResultCodesEnum {
+  Success = 0,
+  Error = 1,
+  CaptchaIsRequired = 10
+}
+export enum CaptchaResCodeEnum {
+  CaptchaIsRequired = 10
+}
+type MeResponseType = {
+  resultCode:ResultCodesEnum,
+  messages:Array<string>
+  data:{ id:number, email:string, login:string },
+}
+type LoginResponseType = {
+  resultCode:ResultCodesEnum | CaptchaResCodeEnum,
+  messages:Array<string>
+  data:{ userId:number },
+}
 export const authAPI = {
-  me:() => {
-    return instance.get(`auth/me`).then((response) => response.data);
+  me(){
+    return instance.get<MeResponseType>(`auth/me`).then((response) => response.data);
   },
-  login:(email,password,rememberMe= false,captcha = null) => {
-    return instance.post(`auth/login`,{ email,password,rememberMe,captcha });
+  login(email:string,password:string,rememberMe= false,captcha:null | string = null){
+    return instance.post<LoginResponseType>(`auth/login`,{ email,password,rememberMe,captcha }).then(res=>res.data);
   },
-  logout:() => {
+  logout(){
     return instance.delete(`auth/login`);
   }
 }
 
+
+
 export const profileAPI = {
-  getProfile:(userId) => {
-    return instance.get(`profile/${userId}`).then((response) => response.data);
+  getProfile(userId:number){
+    return instance.get<ProfileType>(`profile/${userId}`).then((response) => response.data);
   },
-  getStatus:(userId)=>{
+  getStatus(userId:number){
     return instance.get(`profile/status/${userId}`).then((response) => response.data);
   },
-  updateStatus:(status)=>{
+  updateStatus:(status:string)=>{
     return instance.put(`profile/status`,{status}).then((response) => response.data);
   },
-  savePhoto(photoFile) {
+  savePhoto(photoFile:any) {
     const formData = new FormData();
     formData.append("image",photoFile[0]);
-    console.log(formData)
     return instance.put(`profile/photo`,formData,{
       headers:{'Content-Type':'multipart/form-data'}
     })
       .then((response) => response.data);
   },
-  saveProfile(profile) {
+  saveProfile(profile:ProfileType) {
     return instance.put(`profile`,profile).then((response) => response.data);
   }
 }
 
 export const securityAPI = {
-  getCaptchaUrl:() => {
+  getCaptchaUrl(){
     return instance.get(`security/get-captcha-url`);
   }
 }
