@@ -1,5 +1,4 @@
 import {getAuthUserData} from "./authReaducer";
-import {Dispatch} from "redux";
 
 const INITIALIZED_SUCCESS = "INITIALIZED_SUCCESS";
 

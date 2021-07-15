@@ -1,16 +1,8 @@
 import {profileAPI, usersAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
-import {PostType, ProfileType,PhotosType} from "../types/types";
-import {ThunkAction} from "redux-thunk";
-import {AppStateType} from "./redux_store";
-import {Dispatch} from "redux";
-
-const ADD_POST = "ADD-POST";
-const SET_USER_PROFILE = "SET_USER_PROFILE";
-const SET_STATUS = "SET_STATUS";
-const DELETE_POST = "DELETE_POST";
-const SAVE_PHOTO_SUCCESS = "SAVE_PHOTO_SUCCESS";
-
+import {PostType, ProfileType, PhotosType, UserType} from "../types/types";
+import {ThunkAction, ThunkDispatch} from "redux-thunk";
+import {AppStateType, InferActionsTypes} from "./redux_store";
 
 let initialState = {
   postsData: [
@@ -43,84 +35,61 @@ let initialState = {
 export type InitialStateType = typeof initialState
 
 
-const profileReducer = (state:InitialStateType = initialState, action:any):InitialStateType => {
+const profileReducer = (state:InitialStateType = initialState, action:ActionsTypes):InitialStateType => {
   switch (action.type) {
-    case ADD_POST:
-      let newPost = {
-        id: Math.floor(Math.random() * 1000),
-        post: action.newPostText,
-        likesCount: 0,
-        src:
-          "https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png",
-      };
-      return {
-        ...state,
-        postsData: [...state.postsData, newPost],
-        newPostText: "",
-      };
-    case SET_USER_PROFILE:
-      return {
-        ...state,
-        profile: action.profile,
-      };
-    case SET_STATUS:
-      return {
-        ...state,
-        status: action.status,
-      };
-    case DELETE_POST:
-      return {
-        ...state,
-        postsData: state.postsData.filter(post => post.id !== action.postId)
-      }
-    case SAVE_PHOTO_SUCCESS:
-      return {
-        ...state,
-        profile: {...state.profile,photos:action.photos} as ProfileType, // jamanakavor !!!!!
-      }
+    case 'ADD_POST':
+      let newPost = {id: Math.floor(Math.random() * 1000),post: action.newPostText,likesCount: 0,src:"https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png"};
+      return { ...state,postsData: [...state.postsData, newPost],newPostText: "" };
+    case 'SET_USER_PROFILE':
+      return { ...state, profile: action.profile };
+    case 'SET_STATUS':
+      return { ...state, status: action.status };
+    case 'DELETE_POST':
+      return { ...state, postsData: state.postsData.filter(post => post.id !== action.postId) }
+    case 'SAVE_PHOTO_SUCCESS':
+      return { ...state, profile: {...state.profile,photos:action.photos} as ProfileType }
     default:
       return state;
   }
 };
 export default profileReducer;
 
-type AddPostActionCreatorType = {type:typeof ADD_POST, newPostText:string}
-export const addPostActionCreator = (newPostText:string):AddPostActionCreatorType => ({type: ADD_POST, newPostText});
+type ActionsTypes = InferActionsTypes<typeof actions>
+export const actions = {
+  addPostActionCreator(newPostText:string) {
+    return {type: 'ADD_POST', newPostText} as const
+  },
+  setUserProfile: (profile:ProfileType) => {
+    return {type: 'SET_USER_PROFILE', profile} as const
+  },
+  setStatus: (status:string) => {
+    return {type: 'SET_STATUS', status} as const
+  },
+  deletePost: (postId: number) => {
+    return {type: 'DELETE_POST', postId} as const
+  },
+  savePhotoSuccess: (photos: PhotosType) => {
+    return {type: 'SAVE_PHOTO_SUCCESS', photos} as const
+  },
+}
 
-type SetUserProfileActionType = {type:typeof SET_USER_PROFILE, profile:ProfileType}
-export const setUserProfile = (profile:ProfileType):SetUserProfileActionType => ({type: SET_USER_PROFILE, profile});
-
-type SetStatusActionType = { type:typeof SET_STATUS, status:string}
-export const setStatus = (status:string):SetStatusActionType => ({type: SET_STATUS, status});
-
-type DeletePostActionType = { type:typeof DELETE_POST, postId:number}
-export const deletePost = (postId:number):DeletePostActionType => ({type: DELETE_POST, postId});
-
-type SavePhotoSuccessActionType = { type:typeof SAVE_PHOTO_SUCCESS, photos:PhotosType}
-export const savePhotoSuccess = (photos:PhotosType):SavePhotoSuccessActionType => ({type: SAVE_PHOTO_SUCCESS, photos});
-
-type ActionsTypes = SetStatusActionType | DeletePostActionType |
-      SetUserProfileActionType | SavePhotoSuccessActionType | AddPostActionCreatorType
 
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
-type DispatchType = Dispatch<ActionsTypes>
-
-
-
+type DispatchType = ThunkDispatch<Promise<void>, unknown, ActionsTypes>
 
 export const getUserProfile = (userId:number):ThunkType => async (dispatch:DispatchType) => {
   const data = await usersAPI.getOneUser(userId);
-  dispatch(setUserProfile(data));
+  dispatch(actions.setUserProfile(data));
 }
 export const getUserStatus = (userId:number):ThunkType => async (dispatch:DispatchType) => {
   const data = await profileAPI.getStatus(userId);
-  dispatch(setStatus(data));
+  dispatch(actions.setStatus(data));
 }
 export const updateUserStatus = (status:string):ThunkType => async (dispatch:DispatchType) => {
   try{
     const data = await profileAPI.updateStatus(status);
     if (data.resultCode === 0) {
-      dispatch(setStatus(status));
+      dispatch(actions.setStatus(status));
     } else {
       alert(data.messages[0])
       console.warn('Some Error in Profile Reducer : updateUserStatus ')
@@ -132,7 +101,7 @@ export const updateUserStatus = (status:string):ThunkType => async (dispatch:Dis
 export const savePhoto = (file:Object):ThunkType => async (dispatch:DispatchType) => {
   const data = await profileAPI.savePhoto(file);
   if (data.resultCode === 0) {
-    dispatch(savePhotoSuccess(data.data.photos));
+    dispatch(actions.savePhotoSuccess(data.data.photos));
   } else {
     console.warn('Some Error in Profile Reducer : savePhoto')
   }
@@ -141,14 +110,13 @@ export const saveProfile = (profile:ProfileType):ThunkType => async (dispatch:Di
   const id = getState().auth.userId
   const data = await profileAPI.saveProfile(profile);
   if (data.resultCode === 0) {
-
-    // @ts-ignore       =================================================================
+    // @ts-ignore
     dispatch(getUserProfile(id));
   } else {
-
-    // @ts-ignore       =================================================================
+    // @ts-ignore
     dispatch(stopSubmit("editProfile",{_error:data.messages[0]}))
     console.warn('Some Error in Profile Reducer 2')
     return Promise.reject(data.messages[0])
   }
 }
+

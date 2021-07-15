@@ -1,7 +1,16 @@
 import classes from "./Header.module.css";
 import { NavLink } from "react-router-dom";
+import React from "react";
 
-const Header = (props) => {
+
+interface IProps {
+  isAuth: boolean,
+  login: string,
+  userPhoto: undefined | string
+  logout:()=> { type:string,payload:{ [key:string]:any } }
+}
+
+const Header:React.FC<IProps> = (props) => {
   function setUserNameAndPhoto() {
     if (props.isAuth) {
       return (
