@@ -1,7 +1,6 @@
 import axios from "axios";
 import {ProfileType} from "../types/types";
 
-// next lesson 08 => https://youtu.be/Vaa8iuN1YFE?list=PLcvhF2Wqh7DM3z1XqMw0kPuxpbyMo3HvN
 
 const instance = axios.create({
   baseURL:'https://social-network.samuraijs.com/api/1.0/',

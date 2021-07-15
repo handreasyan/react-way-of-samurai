@@ -8,6 +8,8 @@ import { getCurrentPageSel,getFollowingInProgressSel,getIsFetchingSel,
 import {UserType} from "../../types/types";
 import {AppStateType} from "../../redux/redux_store";
 
+// next lesson N10 __ https://youtu.be/FK_FSOCC3ss?list=PLcvhF2Wqh7DM3z1XqMw0kPuxpbyMo3HvN
+
 type MapStatePropsTypes = {
   pageSize: number,
   currentPage: number,
