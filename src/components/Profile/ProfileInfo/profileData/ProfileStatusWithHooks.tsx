@@ -1,10 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 
-const ProfileStatusWithHooks = (props) => {
+interface IProps {
+  status:string,
+  updateUserStatus:(status:string) => void
+}
+
+const ProfileStatusWithHooks:React.FC<IProps> = (props) => {
   const [editMode, setEditMode] = useState(false);
   const [status, setStatus] = useState(props.status);
 
-  const onStatusChange = event => setStatus(event.currentTarget.value);
+  const onStatusChange = (event:ChangeEvent<HTMLInputElement>) => setStatus(event.currentTarget.value);
   const activateEditMode = () => setEditMode(true);
   const deactivateEditMode = () => {
     setEditMode(false);

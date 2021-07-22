@@ -1,7 +1,3 @@
-
-//    lesson 6th ___ https://www.youtube.com/watch?v=fltI2uTv12c&list=PLcvhF2Wqh7DM3z1XqMw0kPuxpbyMo3HvN&index=6&ab_channel=IT-KAMASUTRA
-
-
 export type PostType = {
   id: number,
   post: string,

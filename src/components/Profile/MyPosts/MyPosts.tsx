@@ -1,40 +1,58 @@
 import React from "react";
 import styles from "./MyPosts.module.css";
 import Post from "./Post/Post";
-import {Field, reduxForm} from "redux-form";
-import {maxLengthCreator, required} from "../../../utils/validators/validator";
-import {Textarea} from "../../common/FormsControls/FormsControls";
+import {InjectedFormProps, reduxForm} from "redux-form";
+import {required} from "../../../utils/validators/validator";
+import {getStringKeys, ReturnField, Textarea} from "../../common/FormsControls/FormsControls";
+import {PostType} from "../../../types/types";
 
-const maxLength10 = maxLengthCreator(10)
+export type MapPropsType = {
+  postsData: PostType[];
+}
+export type DispatchPropsType = {
+  addPost: (text: string) => void
+}
 
-const MyPosts = React.memo(props => {
+const MyPosts: React.FC<MapPropsType & DispatchPropsType> = (props) => {
+  type PostType = {
+    id: number,
+    post: string,
+    src: string,
+    likesCount: number,
+  }
   let postElement = props.postsData
-    .map((post) => <Post message={post.post} src={post.src} likes={post.likesCount} key={post.id}/>);
+    .map((post: PostType) => <Post message={post.post} src={post.src} likes={post.likesCount} key={post.id}/>);
 
-  const onAddPost = (formData) => props.addPost(formData.newPostText)
+  const onAddPost = (formData: AddPostFormValuesType) => props.addPost(formData.newPostText)
 
   return (
     <div className={styles.myPosts}>
       <h2>My Posts</h2>
       <div>
-        <AddNewPostForm onSubmit={onAddPost}/>
+        <AddNewPostReduxForm onSubmit={onAddPost}/>
       </div>
       <div className={styles.posts}>{postElement}</div>
     </div>
   );
-});
+}
 
-let AddNewPostForm = (props) => {
+
+type AddPostFormValuesType = {
+  newPostText: string
+}
+type AddPostValKeys = getStringKeys<AddPostFormValuesType>
+
+let AddPostForm: React.FC<InjectedFormProps<AddPostFormValuesType>> = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
-          <Field component={Textarea} name={'newPostText'} validate={[required,maxLength10]} placeholder='Post Message'/>
+        {ReturnField<AddPostValKeys>('Post Message', Textarea, 'newPostText', [required])}
       </div>
       <button>Add Post</button>
     </form>
   )
 }
 
-AddNewPostForm = reduxForm({form:'ProfileAddNewPostForm'})(AddNewPostForm);
+const AddNewPostReduxForm = reduxForm<AddPostFormValuesType, {}>({form: 'ProfileAddNewPostForm'})(AddPostForm);
 
-export default MyPosts;
+export default React.memo(MyPosts);

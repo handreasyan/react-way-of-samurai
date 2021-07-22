@@ -2,16 +2,22 @@ import React from 'react';
 import styles from "./Users.module.css";
 import {NavLink} from "react-router-dom";
 import userPhoto from "../../assets/images/user_img.png";
+import {UserType} from "../../types/types";
 
+type PropsType = {
+  user:UserType,
+  followingInProgress:Array<number>,
+  unfollow:(id:number)=> void,
+  follow:(id:number)=> void,
+}
 
+export const User:React.FC<PropsType> = ({user,followingInProgress,unfollow,follow}) => {
 
-export const User = ({user,followingInProgress,unfollow,follow}) => {
-
-  const renderButton = (text,func,user,followingInProgress) => {
+  const renderButton = (text:string,func:(id:number)=> void,user:UserType,followingInProgress:Array<number>) => {
     return (
       <button
         disabled={followingInProgress.some(
-          (id) => id === user.id
+          (id:number) => id === user.id
         )}
         onClick={() => func(user.id)}
         className={styles.user_btn}

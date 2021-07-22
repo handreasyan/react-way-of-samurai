@@ -8,7 +8,7 @@ type PropsType = {
   onPageChanged:(pageNumber:number)=>void
 }
 
-export const Paginator:React.FC<PropsType> = ({totalUsersCount,pageSize,currentPage,onPageChanged}:PropsType) => {
+export const Paginator:React.FC<PropsType> = ({totalUsersCount,pageSize,currentPage,onPageChanged}) => {
   const pagesCount = Math.ceil(totalUsersCount / pageSize);
   const paginatorPagesCount = 10;
 

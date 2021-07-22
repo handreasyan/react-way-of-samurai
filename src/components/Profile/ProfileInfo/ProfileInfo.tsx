@@ -2,11 +2,21 @@ import Preloader from "../../common/Preloader/loader";
 import styles from "./ProfileInfo.module.css";
 import ProfileStatusWithHooks from "./profileData/ProfileStatusWithHooks";
 import userPhoto from "../../../assets/images/user_img.png";
-import React, {useState} from "react";
+import React, {ChangeEvent, useState} from "react";
 import ProfileData from "./profileData/ProfileInfoData";
 import ProfileDataReduxForm from "./profileData/ProfileDataForm";
+import {ProfileType} from "../../../types/types";
 
-function ProfileInfo({profile, updateUserStatus, status, isOwner, savePhoto,saveProfile}) {
+type PropsType = {
+  profile:ProfileType,
+  updateUserStatus:(st:string)=> void,
+  status:string,
+  isOwner:boolean,
+  savePhoto:(file:File)=> void,
+  saveProfile:(fd:ProfileType) => Promise<void>
+}
+
+const ProfileInfo:React.FC<PropsType> = ({profile, updateUserStatus, status, isOwner, savePhoto,saveProfile}) => {
 
   const [editMode, setEditMode] = useState(false);
 
@@ -17,12 +27,12 @@ function ProfileInfo({profile, updateUserStatus, status, isOwner, savePhoto,save
       </div>
     );
   }
-  const onPhotoSelected = (event) => {
-    if (event.target.files.length) {
-      savePhoto(event.target.files)
+  const onPhotoSelected = (event:ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files?.length) {
+      savePhoto(event.target.files[0])
     }
   }
-  const onSubmit = (formData) => {
+  const onSubmit = (formData:ProfileType) => {
     saveProfile(formData).then(()=>{
       setEditMode(false)
     })
@@ -39,7 +49,7 @@ function ProfileInfo({profile, updateUserStatus, status, isOwner, savePhoto,save
       </div>
 
       <div className={styles.defStatusContent}>
-        <ProfileStatusWithHooks status={status} profile={profile} updateUserStatus={updateUserStatus}/>
+          <ProfileStatusWithHooks status={status} updateUserStatus={updateUserStatus}/>
         <br/>
         {!editMode && <div><button onClick={()=>setEditMode(true)}>Edit</button></div>}
         {

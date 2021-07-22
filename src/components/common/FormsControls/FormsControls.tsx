@@ -15,7 +15,7 @@ export type LoginFormValuesType = {
   captcha: string
 }
 
-export type LoginFromValuesTypeKeys = Extract<keyof LoginFormValuesType, string>
+export type LoginFromValuesTypeKeys = getStringKeys<LoginFormValuesType>
 
 const ElementHOC = (Element: string | any): React.FC<WrappedFieldProps & OwnPropsType> => {
 
@@ -40,10 +40,13 @@ export const Input = ElementHOC("input");
 
 //es functione menak ogtagorcumem Login.tsx faylum , u endex grvaca te inji hamarem sa sarqel
 export function ReturnField<FormKeysType extends string>( placeholder: string, component: React.FC<WrappedFieldProps>,
-                            name: FormKeysType, validate: any[], type = 'text') {
+                            name: FormKeysType, validate: any[], type = 'text',className?:string) {
   return (
     <div>
-      <Field placeholder={placeholder} component={component} name={name} validate={validate} type={type}/>
+      <Field placeholder={placeholder} component={component} name={name} validate={validate} type={type} className={className}/>
     </div>
   )
 }
+
+export type getStringKeys<T> = Extract<keyof T, string>
+

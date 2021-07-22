@@ -32,9 +32,6 @@ const LoginForm:IPorps = ({handleSubmit,error,captchaUrl}) => {
 
 const LoginReduxForm = reduxForm<LoginFormValuesType,LoginFormOwnProps>({form:'login'})(LoginForm);
 
-type LoginType = {
-
-}
 
 type MSTPType = {
   captchaUrl:string | null,

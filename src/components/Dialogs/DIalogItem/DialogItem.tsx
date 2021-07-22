@@ -10,7 +10,7 @@ type PropsType = {
   }
 }
 
-const DialogItem:React.FunctionComponent<PropsType> = ({ itemState }:PropsType) => {
+const DialogItem:React.FunctionComponent<PropsType> = ({ itemState }) => {
   return (
     <div className={styles.dialog}>
       <img src={itemState.src} alt="User" />

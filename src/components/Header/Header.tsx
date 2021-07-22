@@ -1,30 +1,23 @@
 import classes from "./Header.module.css";
 import { NavLink } from "react-router-dom";
 import React from "react";
+import {dtype, mstpType} from "./HeaderContainer";
 
-
-interface IProps {
-  isAuth: boolean,
-  login: string,
-  userPhoto: undefined | string
-  logout:()=> { type:string,payload:{ [key:string]:any } }
-}
-
-const Header:React.FC<IProps> = (props) => {
+const Header:React.FC<mstpType & dtype> = ({isAuth,login,userPhoto,logout}) => {
   function setUserNameAndPhoto() {
-    if (props.isAuth) {
+    if (isAuth) {
       return (
         <div className={classes.loginBlock}>
-          <div>{props.login}</div>
+          <div>{login}</div>
           <img
             src={
-              props.userPhoto
-                ? props.userPhoto
+              userPhoto
+                ? userPhoto
                 : "https://img.icons8.com/bubbles/2x/4a90e2/user-male.png"
             }
             alt="UserIMG"
           />
-          <button onClick={props.logout}>Log Out</button>
+          <button onClick={logout}>Log Out</button>
         </div>
       )
     } else {
@@ -42,7 +35,7 @@ const Header:React.FC<IProps> = (props) => {
           />
         </NavLink>
       </div>
-      <h2>Bodybook</h2>
+      <h2>BodyBook</h2>
       {setUserNameAndPhoto()}
     </header>
   );

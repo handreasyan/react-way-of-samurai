@@ -1,6 +1,14 @@
 import styles from "./Post.module.css";
+import React from "react";
 
-const Post = ({ message, src, likes }) => {
+interface IProps{
+  message:string,
+  src:string,
+  likes:number
+}
+
+
+const Post:React.FC<IProps> = ({ message, src, likes }) => {
   return (
     <div className={styles.item}>
       <img src={src} alt="User" />

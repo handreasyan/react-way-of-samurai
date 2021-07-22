@@ -1,9 +1,15 @@
 import React from "react";
-import {Input, Textarea} from "../../../common/FormsControls/FormsControls";
-import {Field, reduxForm} from "redux-form";
+import {getStringKeys, Input, ReturnField, Textarea} from "../../../common/FormsControls/FormsControls";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import styles from "../../../common/FormsControls/FormsControl.module.css";
+import {ProfileType} from "../../../../types/types";
 
-const ProfileDataForm = ({handleSubmit, profile,error}) => {
+type PropsType = {
+  profile:ProfileType,
+}
+type ProfileTypeKeys = getStringKeys<ProfileType>
+
+const ProfileDataForm:React.FC<InjectedFormProps<ProfileType,PropsType> & PropsType> = ({handleSubmit, profile,error}) => {
 
   const contacts = Object.keys(profile.contacts).map(key => {
     return (
@@ -22,22 +28,22 @@ const ProfileDataForm = ({handleSubmit, profile,error}) => {
       {error && <div className={styles.formSummaryError}>{error}</div>}
       <div>
         <b>Enter Full Name :</b>
-        <Field placeholder={'Enter Full Name'} component={Input} name={'fullName'}/>
+        {ReturnField<ProfileTypeKeys>('Enter Full Name', Input, 'fullName', [], '', '')}
       </div>
       <br/>
       <div>
         <b>Looking for a job :</b>
-        <Field type="checkbox" component={Input} name={'lookingForAJob'}/>
+        {ReturnField<ProfileTypeKeys>('', Input, 'lookingForAJob', [], 'checkbox', '')}
       </div>
       <br/>
       <div>
         <b>My Professional skills :</b>
-        <Field placeholder={'My Professional skills'} component={Textarea} name={'lookingForAJobDescription'}/>
+        {ReturnField<ProfileTypeKeys>('My Professional skills', Textarea, 'lookingForAJobDescription', [], 'checkbox', '')}
       </div>
       <br/>
       <div>
         <b>About Me :</b>
-        <Field placeholder={'About Me'} component={Textarea} name={'aboutMe'}/>
+        {ReturnField<ProfileTypeKeys>('About Me', Textarea, 'aboutMe', [], 'checkbox', '')}
       </div>
       <b>Contacts: </b>
       <br/> {contacts}
@@ -46,6 +52,6 @@ const ProfileDataForm = ({handleSubmit, profile,error}) => {
 
 }
 
-const ProfileDataReduxForm = reduxForm({form: 'editProfile'})(ProfileDataForm);
+const ProfileDataReduxForm = reduxForm<ProfileType,PropsType>({form: 'editProfile'})(ProfileDataForm);
 
 export default ProfileDataReduxForm

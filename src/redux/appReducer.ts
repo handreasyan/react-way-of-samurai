@@ -1,18 +1,14 @@
 import {getAuthUserData} from "./authReaducer";
+import { InferActionsTypes} from "./redux_store";
 
-const INITIALIZED_SUCCESS = "INITIALIZED_SUCCESS";
+let initialState = { initialized:false };
 
-export type InitialStateType = {
-  initialized:boolean
-};
+export type InitialStateType = typeof  initialState
+type ActionsTypes = InferActionsTypes<typeof actions>
 
-let initialState:InitialStateType = {
-  initialized:false,
-};
-
-const appReducer = (state = initialState, action:initializedSuccessActionType):InitialStateType => {
+const appReducer = (state = initialState, action:ActionsTypes):InitialStateType => {
   switch (action.type) {
-    case INITIALIZED_SUCCESS:
+    case "SN/APP/INITIALIZED_SUCCESS":
       return {
         ...state,
         initialized:true,
@@ -22,12 +18,9 @@ const appReducer = (state = initialState, action:initializedSuccessActionType):I
   }
 };
 
-
-type initializedSuccessActionType = {
-  type:typeof INITIALIZED_SUCCESS;
+export const actions = {
+  initializedSuccess:()=> ({type: "SN/APP/INITIALIZED_SUCCESS"}  as const)
 }
-export const initializedSuccess = ():initializedSuccessActionType => ({type: INITIALIZED_SUCCESS});
-
 
 export const initializeApp = () => (dispatch:any) => {
   let promise = dispatch(getAuthUserData());
@@ -35,7 +28,7 @@ export const initializeApp = () => (dispatch:any) => {
   // let somethingelse2 = dispatch(somethingelsefunc2())
     // promise all _ em ogtagorcel , vorovhetev karam unenam naev ayl dispatcher voronc katarveluc heto nor karam entadrem vor initializedSuccess ))
   Promise.all([promise]).then(()=>{
-    dispatch(initializedSuccess());
+    dispatch(actions.initializedSuccess());
   });
 }
 

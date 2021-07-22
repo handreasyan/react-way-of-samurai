@@ -1,6 +1,13 @@
 import React from "react";
+import {ContactsType, ProfileType} from "../../../../types/types";
 
-const ProfileData = ({profile, isOwner, goToEditMode}) => {
+type ProfileDataType = {
+  profile:ProfileType,
+  isOwner?:boolean,
+  goToEditMode?:any
+}
+
+const ProfileData:React.FC<ProfileDataType> = ({profile, isOwner, goToEditMode}) => {
   return (
     <div>
       {
@@ -29,7 +36,7 @@ const ProfileData = ({profile, isOwner, goToEditMode}) => {
         Object.values(profile.contacts)[0] &&
         <div>
           <b>My Contacts: </b>
-          <Contacts contacts={profile.contacts}/>
+            <Contacts contacts={profile.contacts}/>
         </div>
       }
     </div>
@@ -37,17 +44,21 @@ const ProfileData = ({profile, isOwner, goToEditMode}) => {
 
 }
 
-const Contacts = ({contacts}) => {
+type ContactsPropsType = {
+  contacts:ContactsType
+}
+
+const Contacts:React.FunctionComponent<ContactsPropsType> = ({contacts}) => {
 
   const contactsKeys = Object.keys(contacts);
   return (
     <div>
       {
-        contactsKeys.map(contact => {
-          if (contacts[contact]) {
+        contactsKeys.map((contact)  => {
+          if (contacts[contact as keyof ContactsType ]) {
             return (
-              <span key={contact} style={{marginLeft: '20px'}}>
-                <a href={`https://${contacts[contact]}`} target='blank'>{contact}</a>
+              <span key={contact as keyof ContactsType } style={{marginLeft: '20px'}}>
+                <a href={`https://${contacts[contact as keyof ContactsType ]}`} target='blank'>{contact}</a>
               </span>
             )
           }
