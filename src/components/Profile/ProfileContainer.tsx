@@ -14,14 +14,14 @@ type MapPropsType = {
   isAuth:boolean
 }
 type DispatchPropsType = {
-  saveProfile:(pt:ProfileType) => Promise<void>
+  saveProfile:(profile:ProfileType) => Promise<void>
   getUserProfile:(userId:number)=>void,
   getUserStatus:(userId:number)=>void,
   updateUserStatus:(str:string)=> void,
   savePhoto:(file:File)=> void,
 }
 type PathParamsType = { userId:string }
-type ProfileContainerPropsType = MapPropsType &DispatchPropsType & RouteComponentProps<PathParamsType>
+type ProfileContainerPropsType = MapPropsType & DispatchPropsType & RouteComponentProps<PathParamsType>
 
 class ProfileContainer extends React.Component<ProfileContainerPropsType> {
   refreshProfile = () => {
