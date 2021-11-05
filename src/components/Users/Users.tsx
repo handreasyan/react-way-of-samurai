@@ -2,6 +2,7 @@ import Paginator from '../common/paginator/Paginator'
 import User from './User'
 import { UserType } from '../../types/types'
 import { Formik, Field, Form } from 'formik'
+import UserSearchForm from "./UserSearchForm";
 
 type PropsType = {
   totalUsersCount: number
@@ -35,42 +36,6 @@ let Users = ({
           follow={follow}
         />
       ))}
-    </div>
-  )
-}
-
-const usersSearchFormValidate = (values: any) => {
-  const errors = {}
-
-  return errors
-}
-
-// current Lesson _  Formik Lib =>  https://youtu.be/2hMbJmIqpkc?list=PLcvhF2Wqh7DM3z1XqMw0kPuxpbyMo3HvN&t=941
-
-const UserSearchForm = () => {
-  const handleSubmit = (values, { setSubmitting }) => {
-    setTimeout(() => {
-      alert(JSON.stringify(values, null, 2))
-      setSubmitting(false)
-    }, 400)
-  }
-
-  return (
-    <div>
-      <Formik
-        initialValues={{ term: '' }}
-        validate={usersSearchFormValidate}
-        onSubmit={handleSubmit}
-      >
-        {({ isSubmitting }) => (
-          <Form>
-            <Field type="text" name="term" />
-            <button type="submit" disabled={isSubmitting}>
-              Submit
-            </button>
-          </Form>
-        )}
-      </Formik>
     </div>
   )
 }

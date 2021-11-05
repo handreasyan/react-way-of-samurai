@@ -11,6 +11,7 @@ let initialState = {
   currentPage: 1,
   isFetching: false,
   followingInProgress: [] as Array<number>, // array of users id
+  filter:{term:''}
 };
 
 const usersReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
@@ -33,6 +34,8 @@ const usersReducer = (state: InitialStateType = initialState, action: ActionsTyp
       return {...state, totalUsersCount: action.totalCount};
     case 'SN/USERS/TOGGLE_IS_FETCHING':
       return {...state, isFetching: action.isFetching};
+    case 'SN/USERS/SET_FILTER':
+      return {...state, filter:action.payload};
     case 'SN/USERS/TOGGLE_IS_FOLLOWING_PROGRESS':
       return {
         ...state,
@@ -51,17 +54,19 @@ export const actions = {
   unfollowSuccess: (userId: number) => ({type: 'SN/USERS/UNFOLLOW', userId} as const),
   setUsers: (users: Array<UserType>) => ({type: 'SN/USERS/SET_USERS', users} as const),
   setTotalUserCount: (totalCount: number) => ({type: 'SN/USERS/SET_TOTAL_USERS_COUNT', totalCount} as const),
+  setFilter: (term: string) => ({type: 'SN/USERS/SET_FILTER', payload: { term }} as const),
   setCurrentPage: (currentPage: number) => ({type: 'SN/USERS/SET_CURRENT_PAGE', currentPage} as const),
   toggleIsFetching: (isFetching: boolean) => ({type: 'SN/USERS/TOGGLE_IS_FETCHING', isFetching} as const),
   toggleFollowingInProgress: (isFetching: boolean, userId: number) => ({ type: 'SN/USERS/TOGGLE_IS_FOLLOWING_PROGRESS',isFetching,userId} as const),
 }
 
-export const requestUsers = (page: number, pageSize: number): ThunkType => (
+export const requestUsers = (page: number, pageSize: number,term:string): ThunkType => (
   async (dispatch, getState) => {
     dispatch(actions.toggleIsFetching(true));
     dispatch(actions.setCurrentPage(page));
+    dispatch(actions.setFilter(term));
 
-    const data = await usersAPI.getUsers(page, pageSize)
+    const data = await usersAPI.getUsers(page, pageSize,term)
     dispatch(actions.toggleIsFetching(false));
     dispatch(actions.setUsers(data.items));
     dispatch(actions.setTotalUserCount(data.totalCount));
